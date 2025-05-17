@@ -28,10 +28,8 @@ export const Categories = () => {
     },[])
   return (
     <div>
-      <div className=''>
-        <Header />
-      </div>
-      <div className='m-6 '>
+      
+      <div className='lg:m-6 '>
           <h2 className='text-center text-4xl font-medium text-gray-700 m-6'>Choose a category to unleash your knowledge!</h2>
           <div className='flex lg:flex-row flex-col gap-4 items-center '>
               {categories.map(category=>(

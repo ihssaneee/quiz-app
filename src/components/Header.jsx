@@ -3,7 +3,8 @@ import logo from "../assets/quiz.png"
 export const Header = () => {
   return (
     
-    <nav className='flex items-center justify-between font-poppins'>
+   <div className='fixed top-0 bg-[#fffcfc] w-full '>
+     <nav className='flex  justify-between font-poppins '>
       <div className='px-8 flex items-center gap-3'>
         <img src={logo} className='w-13 h-13 text-' />
         <span className='text-2xl font-bold text-gray-700'>Quiz Time</span>
@@ -16,5 +17,6 @@ export const Header = () => {
         </ul>
         </div>
     </nav>
+   </div>
   )
 }
