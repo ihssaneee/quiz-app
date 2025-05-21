@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import logo from "../assets/quiz.png"
 import MenuIcon from '@mui/icons-material/Menu';
+import { Link } from 'react-router-dom';
 export const Header = () => {
   const [isToggled,setIsToggled]= useState(false);
   const handleToggle=()=>{
@@ -10,10 +11,10 @@ export const Header = () => {
     
    
      <nav className='flex items-center justify-between font-poppins py-3 pr-3 fixed top-0  bg-[#fffcfc] w-full'>
-      <div className='px-8 flex items-center gap-3'>
+      <Link to="/" className='px-8 flex items-center gap-3'>
         <img src={logo} className='w-13 h-13 text-' />
         <span className='text-2xl font-bold text-gray-700'>Quiz Time</span>
-      </div>
+      </Link>
       <div>
      
       </div>

@@ -1,19 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getDocs, collection, db, doc } from "../services/firebase.js";
+import { getDocs, collection, db, doc } from "../../services/firebase.js";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
 import HighlightOffOutlinedIcon from "@mui/icons-material/HighlightOffOutlined";
-import stopWatch from "../assets/stopwatch.gif"
+import stopWatch from '../../assets/stopwatch.gif';
 import Tooltip from '@mui/material/Tooltip';
 import { Howl } from "howler";
-import beep from '../assets/sounds/beep_sound.mp3'
+import beep from '../../assets/sounds/beep_sound.mp3'
+import QuizResult from "./quizResult.jsx";
 const Quiz = () => {
   const { id } = useParams();
   const [questions, setQuestions] = useState([]);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [isAnswered, setIsAnswered] = useState({});
-  const [timePerQuestion, setTimePerQuestion] = useState([]);
+  
 
 
   const handleNextClick = () => {
@@ -21,7 +22,7 @@ const Quiz = () => {
     setTimeLeft(10);
 
     if (isTimerEnabled){
-      soundRef.current.stop();
+      soundRef.current.fade(1,0,700);
     };
     setTimeLeft(10)
   };
@@ -128,7 +129,7 @@ const Quiz = () => {
         setQuestionIndex(prev => prev + 1);
         setTimeLeft(10)
         if (soundRef.current){
-          soundRef.current.stop();
+          soundRef.current.fade(1,0,700);
         }
         setIsAnswered(prev=>({
           ...prev,
@@ -232,27 +233,8 @@ const Quiz = () => {
 
         </div>
       ) : (
-        <div className="bg-cyan-600 flex flex-col gap-6 py-20 rounded-2xl justify-center  items-center p-4 mx-auto my-8 max-w-lg">
-          <span className="text-white text-4xl font-bold">
-            {" "}
-            Your score: {score}/{questions.length}{" "}
-          </span>
-          <span className="text-white text-2xl font-medium">
-            Want to try again ?{" "}
-          </span>
-          <button
-            onClick={handleRestart}
-            className="cursor-pointer text-white bg-cyan-500 w-auto mx-auto text-center p-4 px-6 rounded-2xl text-[20px] hover:bg-cyan-400 font-medium"
-          >
-            Restart
-          </button>
-          <span className="text-white text-2xl font-medium">or</span>
-          <Link
-            to="/categories"
-            className="cursor-pointer font-medium text-white bg-cyan-500 w-auto mx-auto text-center p-4 rounded-2xl text-lg hover:bg-cyan-400"
-          >
-            Go to Categories
-          </Link>
+        <div className="m-8">
+            <QuizResult score={score} questionsLength={questions.length} restart={handleRestart} questions={questions} answers={isAnswered}/>
         </div>
       )}
     </div>
