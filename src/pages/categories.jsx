@@ -30,7 +30,7 @@ export const Categories = () => {
     <div>
       
       <div className='lg:m-6 '>
-          <h2 className='text-center text-4xl font-medium text-gray-700 m-6'>Choose a category to unleash your knowledge!</h2>
+          <h2 className='text-center text-4xl font-medium text-cyan-950 m-6'>Choose a category to unleash your knowledge!</h2>
           <div className='flex lg:flex-row flex-col gap-4 items-center '>
               {categories.map(category=>(
                 <CategoryCard key={category.id} id={category.id} name={category.name} description={category.description} />
