@@ -24,7 +24,8 @@ function App() {
     <Route path="/quiz_summary" element={<QuizSummary />} />
   </Route>
   {/* Route without layout */}
-  <Route path="/signUp" element={<SignUp />} />
+  <Route path="/signUp/email" element={<SignUp />} />
+  <Route path="/signUp" element={<SignUpForm />} />
   
 </Routes>
    </>

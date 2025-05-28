@@ -5,6 +5,8 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import HttpsOutlinedIcon from "@mui/icons-material/HttpsOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const [passwordVisibility, setPasswordVisibility] = useState({
@@ -30,8 +32,12 @@ const SignUp = () => {
   const password = watch("password", "");
   return (
     <div className="flex flex-col gap-2 mx-auto  rounded-2xl   font-poppins max-w-lg border-neutral-200 border my-2 shadow-lg  py-4">
-      <div className="border-b text-center border-b-neutral-200 w-full py-4">
+      <div className="border-b text-center items-center gap-34 flex justify-start px-5 border-b-neutral-200 w-full py-4">
+        <Link to='/signUp' className="border rounded-full flex items-center h-11 w-11 justify-center hover:border-neutral-600 cursor-pointer border-neutral-400">
+          <ArrowBackIosIcon fontSize="small" className="text-gray-700" />
+        </Link>
         <h1 className="text-4xl text-cyan-600  font-medium">Sign Up</h1>
+        
       </div>
       <form className="">
         <div className={divStyle}>
