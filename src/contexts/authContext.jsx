@@ -1,6 +1,7 @@
 import { onAuthStateChanged } from "firebase/auth";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../services/firebase";
+import { signInWithGoogle } from "../services/authService";
 const AuthContext=createContext();
 
 export const useAuth= ()=>{
@@ -14,8 +15,20 @@ const AuthProvider=({children})=>{
         return ()=>unsubscribe();
     },[])
 
+    const logInWithGoogle= async()=>{
+        try{
+            const currentUser= await signInWithGoogle()
+            setUser(currentUser);
+            console.log('user signed up successfully with google')
+        }
+        catch(error){
+            console.error('user could not sign up with google',error)
+            throw error;
+        }
+    }
+
     return(
-        <AuthContext.Provider value={{ user }}>
+        <AuthContext.Provider value={{ user,logInWithGoogle }}>
             {children}
         </AuthContext.Provider>
     )
