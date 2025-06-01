@@ -1,4 +1,4 @@
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup ,signOut,createUserWithEmailAndPassword,updateProfile} from "firebase/auth";
 import {auth,provider} from './firebase.js'
 
 export const signInWithGoogle= async()=>{
@@ -12,4 +12,31 @@ export const signInWithGoogle= async()=>{
     catch(error){
             throw error;
         }
+}
+export const logOut=async()=>{
+    try{
+        await signOut(auth)
+        console.log('user signed out successfully')
+    }
+    catch(error){
+        console.error('user could not log out',error);
+        throw error
+    }
+
+
+}
+export const signUpWithEmail=async (email,username,password) => {
+    try{
+        const result= await createUserWithEmailAndPassword(auth,email,password)
+
+        await updateProfile(user,{displayName:username})
+        console.log('user signed up with email')
+        return user;
+
+    }
+    catch(error){
+        console.error('user could not sign up with email',error);
+        throw error
+    }
+    
 }

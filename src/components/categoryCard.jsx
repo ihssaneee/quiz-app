@@ -20,6 +20,7 @@ const CategoryCard = ({ name, description,id }) => {
       <img
         src={imageSrc}
         className="lg:h-54 lg:w-78 w-full h-auto object-cover p-1 rounded-2xl mx-auto "
+        loading="lazy"
       />
       <div className="p-4 flex flex-col gap-3 ">
         <h3 className="text-2xl text-gray-100 font-bold">{name}</h3>
