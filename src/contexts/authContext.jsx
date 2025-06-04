@@ -1,7 +1,8 @@
 import { onAuthStateChanged } from "firebase/auth";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../services/firebase";
-import { signInWithGoogle, logOut,signUpWithEmail } from "../services/authService";
+import { signInWithGoogle, logOut,signUpWithEmail ,signInWithEmail} from "../services/authService";
+
 const AuthContext=createContext();
 
 export const useAuth= ()=>{
@@ -44,9 +45,18 @@ const AuthProvider=({children})=>{
             throw error;
         }
     }
+    const logInWithEmail=async(email,password)=>{
+        try{
+            const currentUser= await signInWithEmail(email,password);
+            setUser(currentUser)
+        }
+        catch(error){
+            throw error;
+        }
+    }
 
     return(
-        <AuthContext.Provider value={{ user,logInWithGoogle,signOutUser,signUpEmail }}>
+        <AuthContext.Provider value={{ user,logInWithGoogle,signOutUser,signUpEmail,logInWithEmail }}>
             {children}
         </AuthContext.Provider>
     )

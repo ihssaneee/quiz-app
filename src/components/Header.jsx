@@ -95,6 +95,7 @@ export const Header = () => {
           >
             <li className="">
               <Link
+                to="/signIn"
                 className={` ${
                   isToggled
                     ? "bg-[#fffcfc] text-black"

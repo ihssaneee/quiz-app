@@ -122,7 +122,7 @@ const SignUp = () => {
             Password
           </label>
           <div className={` ${inputStyle} + justify-between `}>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 w-full">
               <HttpsOutlinedIcon fontSize="medium" className="text-gray-500" />
               <input
                 type={passwordVisibility.password}

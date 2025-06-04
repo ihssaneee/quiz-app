@@ -7,8 +7,10 @@ import Quiz from './components/quiz/quiz';
 import Layout from './components/layout';
 import QuizSummary from './components/quiz/quizSummary';
 import QuizResult from './components/quiz/quizResult';
-import SignUp from './components/sign_up/EmailSignUp';
+import SignUp from './components/sign_up/emailSignUp';
 import SignUpForm from './components/sign_up/signUpForm';
+import SignInForm from './components/sign_in/signInForm';
+
 function App() {
   
 
@@ -26,6 +28,7 @@ function App() {
   {/* Route without layout */}
   <Route path="/signUp/email" element={<SignUp />} />
   <Route path="/signUp" element={<SignUpForm />} />
+  <Route path="/signIn" element={<SignInForm />} />
   
 </Routes>
    </>
