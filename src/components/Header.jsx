@@ -6,6 +6,7 @@ import { useAuth } from "../contexts/authContext.jsx";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import default_user from "../assets/default_user.png"
 
 export const Header = () => {
   const [isToggled, setIsToggled] = useState(false);
@@ -18,7 +19,7 @@ export const Header = () => {
   const handleDropDownToggle = () => {
     setIsDropdownToggled(!isDropdwonToggled);
   };
-  const userImage = user?.photoURL;
+  const userImage = user?.photoURL?photoURL:default_user;
   useEffect(() => {
     const handleBodyClick = (e) => {
       if (
@@ -38,7 +39,7 @@ export const Header = () => {
   return (
     <nav className="flex items-center justify-between font-poppins py-3 pr-3 fixed top-0  bg-[#fffffc] w-full">
       <Link to="/" className="px-8 flex items-center gap-3">
-        <img src={logo} className="w-13 h-13 text-" />
+        <img src={logo} className="w-13 h-13 " />
         <span className="text-2xl font-bold text-gray-700">Quiz Time</span>
       </Link>
      

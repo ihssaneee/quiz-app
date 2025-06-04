@@ -6,13 +6,17 @@ import HttpsOutlinedIcon from "@mui/icons-material/HttpsOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/authContext";
+import { BeatLoader } from "react-spinners";
+
 
 const SignUp = () => {
   const [passwordVisibility, setPasswordVisibility] = useState({
     password: "password",
     password_confirmation: "password",
   });
+  const { signUpEmail } = useAuth();
   const HandlePasswordVisibility = (field) => {
    
     setPasswordVisibility(prev=>({
@@ -30,6 +34,30 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
   const password = watch("password", "");
+  const [loading,setLoading]= useState(false);
+  const [error,setError]= useState(null)
+  const navigate=useNavigate()
+  const onSubmit= async(data)=>{
+      setLoading(true);
+     const {confirmPassword,...formDataToSend}=data
+        try{
+          await signUpEmail(formDataToSend.email,formDataToSend.password,formDataToSend.username);
+          console.log('user signed up successfully with email ')
+
+          setError(null)
+          navigate('/categories')
+
+        }
+        catch(error){
+          console.error('user could not sign up with email',error)
+          const errorMessage= error?.code ||'an expected error happened'
+          setError(errorMessage)
+        }
+        finally{
+          setLoading(false)
+          
+        }
+  }
   return (
     <div className="flex flex-col gap-2 mx-auto  rounded-2xl   font-poppins max-w-lg border-neutral-200 border my-2 shadow-lg  py-4">
       <div className="border-b text-center items-center gap-34 flex justify-start px-5 border-b-neutral-200 w-full py-4">
@@ -39,7 +67,7 @@ const SignUp = () => {
         <h1 className="text-4xl text-cyan-600  font-medium">Sign Up</h1>
         
       </div>
-      <form className="">
+      <form onSubmit={handleSubmit(onSubmit)} className="">
         <div className={divStyle}>
           <label htmlFor="UserName" className="text-gray-800">
             Username
@@ -157,7 +185,12 @@ const SignUp = () => {
           <button className="p-2.5  text-lg w-full bg-cyan-600 text-white rounded-full cursor-pointer hover:bg-cyan-500">
             Sign up
           </button>
+         
         </div>
+         {
+            loading?<div className="flex items-center justify-center "><BeatLoader size={15} color="#00B8DB" /></div>:error&&<span className="text-red-500 text-lg flex flex-wrap m-8" >{error}</span>
+          }
+         
       </form>
     </div>
   );

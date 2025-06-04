@@ -25,13 +25,13 @@ export const logOut=async()=>{
 
 
 }
-export const signUpWithEmail=async (email,username,password) => {
+export const signUpWithEmail=async (email,password,username) => {
     try{
         const result= await createUserWithEmailAndPassword(auth,email,password)
 
-        await updateProfile(user,{displayName:username})
+        await updateProfile(result.user,{displayName:username})
         console.log('user signed up with email')
-        return user;
+        return result.user;
 
     }
     catch(error){
