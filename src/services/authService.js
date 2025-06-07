@@ -42,7 +42,7 @@ export const signUpWithEmail=async (email,password,username) => {
 }
 export const signInWithEmail=async(email,password)=>{
     try{
-        const result= await signInWithEmailAndPassword(email,password);
+        const result= await signInWithEmailAndPassword(auth,email,password);
         console.log('user signed in successfully with email');
         return result.user
     }

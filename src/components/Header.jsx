@@ -19,7 +19,7 @@ export const Header = () => {
   const handleDropDownToggle = () => {
     setIsDropdownToggled(!isDropdwonToggled);
   };
-  const userImage = user?.photoURL?photoURL:default_user;
+ const imgSrc=user?.photoURL?user.photoURL:default_user
   useEffect(() => {
     const handleBodyClick = (e) => {
       if (
@@ -37,7 +37,7 @@ export const Header = () => {
   
   
   return (
-    <nav className="flex items-center justify-between font-poppins py-3 pr-3 fixed top-0  bg-[#fffffc] w-full">
+    <nav className="flex items-center justify-between font-poppins py-3 pr-3 fixed top-0  bg-white border-b border-neutral-100 w-full">
       <Link to="/" className="px-8 flex items-center gap-3">
         <img src={logo} className="w-13 h-13 " />
         <span className="text-2xl font-bold text-gray-700">Quiz Time</span>
@@ -51,7 +51,7 @@ export const Header = () => {
         >
           <div className="flex gap-2 items-center">
             <img
-              src={userImage}
+              src={imgSrc}
               alt="profile picture"
               className="w-10 h-10 rounded-full"
             />
@@ -68,7 +68,7 @@ export const Header = () => {
           >
             <Link
               to=""
-              className="text-lg flex gap-2 items-center px-6 py-2 text-gray-700 hover:bg-gray-50"
+              className="text-lg flex gap-2 items-center cursor-pointer px-6 py-2 text-gray-700 hover:bg-gray-50"
             >
               <SettingsOutlinedIcon
                 fontSize="medium"

@@ -32,7 +32,7 @@ const SignUpForm = () => {
         <Link to="/signUp/email" className="flex items-center justify-center gap-3 border w-90 font-medium cursor-pointer hover:border-gray-400 border-neutral-300 shadow-lg p-4  rounded-full">Continue with email</Link>
       </div>
       <div className='pt-4 '>
-        <span className='text-sm text-gray-600'>Already have an Account? <Link className='underline text-gray-800'>Sign in</Link> </span>
+        <span className='text-sm text-gray-600'>Already have an Account? <Link to="/signIn" className='underline text-gray-800'>Sign in</Link> </span>
       </div>
     </div>
   )

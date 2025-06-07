@@ -19,7 +19,7 @@ const SignInForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { logInWithGoogle } = useAuth();
+  const { logInWithGoogle,logInWithEmail } = useAuth();
   const [password_visibility, setPasswordVisibility] = useState("password");
   const HandlePasswordVisibility = () => {
     setPasswordVisibility(
@@ -38,8 +38,25 @@ const SignInForm = () => {
   const [loading,setLoading]=useState(false)
   const [error,setError]=useState(null)
   const onSubmit=async(data)=>{
-    setLoading(true)
+    setLoading(true);
+    try{
+      await logInWithEmail(data.email,data.password);
+      console.log('user signed in successfully with email');
+      setError(null)
+      navigate('/categories')
+    }
+    catch(error){
+      console.error('user couldnot sign in with email','error code:',error);
+      const errorCodes=error?.code==="auth/invalid-credential"&&"Invalid email or password. Please check your credentials."
+      const errorMessage=errorCodes || "an unexpected error happened";
+      setError(errorMessage);
+      
+    }
+    finally{
+      setLoading(false);
+    }
   }
+
   const inputStyle =
     "border p-4  rounded-2xl border-neutral-300 focus:border-cyan-600  flex  items-center gap-3.5 px-5 focus:border-2 focus:ring-0 focus:outline-none";
   return (
@@ -132,6 +149,9 @@ const SignInForm = () => {
           </Link>
         </span>
       </div>
+       {
+                  loading?<div className="flex items-center justify-center "><BeatLoader size={15} color="#00B8DB" /></div>:error&&<span className="text-red-500 text-base " >{error}</span>
+                }
     </div>
   );
 };
