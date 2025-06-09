@@ -51,7 +51,7 @@ export const Header = () => {
         >
           <div className="flex gap-2 items-center">
             <img
-              src={imgSrc}
+              src={imgSrc ? imgSrc:default_user}
               alt="profile picture"
               className="w-10 h-10 rounded-full"
             />

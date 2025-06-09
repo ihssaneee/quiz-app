@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { getDocs, collection, db, doc } from "../../services/firebase.js";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
 import HighlightOffOutlinedIcon from "@mui/icons-material/HighlightOffOutlined";
@@ -8,8 +8,11 @@ import Tooltip from '@mui/material/Tooltip';
 import { Howl } from "howler";
 import beep from '../../assets/sounds/beep_sound.mp3'
 import QuizResult from "./quizResult.jsx";
+import {useAuth} from '../../contexts/authContext.jsx'
 const Quiz = () => {
   const { id } = useParams();
+  //function for saving history
+  const {saveQuizHistory}=useAuth();
   const [questions, setQuestions] = useState([]);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -160,6 +163,25 @@ const Quiz = () => {
     soundRef.current.play();
      }
   },[timeLeft])
+
+
+  //save quiz history for authenticated users
+  const location = useLocation();
+  const { name } = location.state ||  "unknown" ;
+  useEffect(() => {
+  
+
+    const saveHistory = async () => {
+      if (questionIndex === questions.length && questions.length > 0) {
+        try {
+          await saveQuizHistory(name, score, questions.length);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
+    saveHistory();
+  }, [questionIndex, questions.length, saveQuizHistory]);
   
   return (
     <div className="font-poppins ">

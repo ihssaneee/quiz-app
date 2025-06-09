@@ -26,7 +26,7 @@ const CategoryCard = ({ name, description,id }) => {
         <h3 className="text-2xl text-gray-100 font-bold">{name}</h3>
         <p className="text-[17px] text-gray-200 min-h-13 ">{description}</p>
         <div className="flex items-center justify-center mt-6">
-        <Link to={`/quiz/${id}`} className=" text-center font-medium text-white bg-cyan-500 w-34 p-4 rounded-2xl mx-auto  hover:bg-cyan-400">
+        <Link to={`/quiz/${id}`} state={{name}} className=" text-center font-medium text-white bg-cyan-500 w-34 p-4 rounded-2xl mx-auto  hover:bg-cyan-400">
           Start Quiz
         </Link>
       </div>
